@@ -22,5 +22,12 @@ Route::get('/planets', function () {
         ],
     ];
 
-    return view('planets', compact('planets'));
+    $collection = collect($planets);
+
+    if (request()->has('planeet')) {
+        $filtered = $collection->where('name', ucfirst(request('planeet')));
+        return view('planets', ['planeten' => $filtered->all()]);
+    }
+
+    return view('planets', ['planeten' => $collection->all()]);
 });
