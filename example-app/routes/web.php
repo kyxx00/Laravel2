@@ -10,4 +10,4 @@ Route::get('/planets/{planet}', [PlanetController::class, 'show']);
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
