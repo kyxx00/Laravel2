@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Planet;
 
 class PlanetSeeder extends Seeder
 {
@@ -33,12 +33,10 @@ class PlanetSeeder extends Seeder
         ];
 
         foreach ($planets as $planet) {
-            DB::table('planets')->insert([
+            Planet::create([
                 'name' => $planet['name'],
                 'description' => $planet['description'],
                 'size_in_km' => $planet['size_in_km'],
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
     }
