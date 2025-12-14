@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Planets</title>
+    <title>Planeten</title>
 </head>
 <body>
-    <h1>Planets</h1>
+    <h1>Alle Planeten</h1>
+    
     <ul>
-        @foreach ($planets as $planet)
+        @foreach($planets as $planet)
             <li>
-                <strong>{{ $planet['name'] }}</strong><br>
-                {{ $planet['description'] }}
+                <a href="/planets/{{ $planet->id }}">
+                    {{ $planet->name }}
+                </a>
+                - {{ $planet->description }}
+                <br>
+                <small>Solar System: {{ $planet->solar_system_id ? 'Milky Way' : 'Unknown' }}</small>
             </li>
         @endforeach
     </ul>
