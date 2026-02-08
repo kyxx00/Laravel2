@@ -9,14 +9,17 @@
     <ul>
         @foreach($planets as $planet)
             <li>
-                <a href="/planets/{{ $planet->id }}">
+                <a href="{{ route('planets.show', $planet->id) }}">
                     {{ $planet->name }}
                 </a>
                 - {{ $planet->description }}
                 <br>
-                <small>Solar System: {{ $planet->solar_system_id ? 'Milky Way' : 'Unknown' }}</small>
+                <small>Solar System: {{ $planet->solarSystem->name ?? 'Unknown' }}</small>
             </li>
         @endforeach
     </ul>
+    
+    <br>
+    <a href="{{ route('solarsystems.index') }}">← View Solar Systems</a>
 </body>
 </html>

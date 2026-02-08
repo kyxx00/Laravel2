@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Planet;
+use Illuminate\Http\Request;
 
 class PlanetController extends Controller
 {
     public function index()
     {
-        $planets = Planet::all();
-        return view('planets', ['planets' => $planets]);
+        $planets = Planet::with('solarSystem')->get();
+        return view('planets', compact('planets'));
     }
 
-    public function show($planet)
+    public function show($id)
     {
-        $selectedPlanet = Planet::where('name', ucfirst($planet))->first();
-        
-        if (!$selectedPlanet) {
-            abort(404, 'Planet not found');
-        }
-
-        return view('planet-detail', ['planet' => $selectedPlanet]);
+        $planet = Planet::with('solarSystem')->findOrFail($id);
+        return view('planet-detail', compact('planet'));
     }
 }
